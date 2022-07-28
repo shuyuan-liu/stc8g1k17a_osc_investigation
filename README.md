@@ -13,3 +13,11 @@ The clock is routed rather simply as follows (excluding clock output):
 The internal high-speed oscillator is controlled by three registers:
 
 ![](images/stc8_hs_osc_control.svg)
+
+`IRTRIM` is able to adjust the base frequency both upwards and downwards since both frequencies below 20 MHz and above 33 MHz are possible according to the datasheet. However it’s unclear what value of `IRTRIM` is the “origin”.
+
+The datasheet states `IRTRIM` changes frequency linearly, so the 0.24% is probably relative to the base frequency and not the current frequency.
+
+## The Plan
+
+The plan is to write a program to switch through all combinations of `IRTRIM` and `LIRTRIM` for both the 20 MHz and 33 MHZ “bands”, and output a pulse lasting a fixed number of cycles so the frequency can be measured. In fact at each step it could output the `IRTRIM` and `LIRTRIM` values through the UART so the frequencies are conveniently labelled with the values.
