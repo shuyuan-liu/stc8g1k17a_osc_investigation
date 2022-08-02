@@ -21,3 +21,5 @@ The datasheet states `IRTRIM` changes frequency linearly, so the 0.24% is probab
 ## The Plan
 
 The plan is to write a program to switch through all combinations of `IRTRIM` and `LIRTRIM` for both the 20 MHz and 33 MHZ “bands”, and output a pulse lasting a fixed number of cycles so the frequency can be measured. In fact at each step it could output the `IRTRIM` and `LIRTRIM` values through the UART so the frequencies are conveniently labelled with the values.
+
+*After trying for four days or so it seems my chip’s UART peripheral has gone bust for some reason as it doesn’t even work with official example code. And as this chip has **no debugging support**, I probably won’t bother trying again…*
