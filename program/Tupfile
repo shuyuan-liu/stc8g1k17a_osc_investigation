@@ -1,0 +1,3 @@
+.gitignore
+: foreach *.c |> sdcc -c %f -o %o |> %B.rel | %O.asm %O.lst %O.sym
+: *.rel | *.lst |> sdcc %f -o %o |> main.ihx | %O.lk %O.map %O.mem %O.rst
