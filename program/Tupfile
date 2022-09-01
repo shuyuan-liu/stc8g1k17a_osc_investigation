@@ -1,3 +1,9 @@
+# Generate .gitignore
 .gitignore
-: foreach *.c |> sdcc -c %f -o %o |> %B.rel | %O.asm %O.lst %O.sym
-: *.rel | *.lst |> sdcc %f -o %o |> main.ihx | %O.lk %O.map %O.mem %O.rst
+
+CC = sdcc
+CFLAGS += --std-sdcc11 -mmcs51 --opt-code-speed
+LDFLAGS += --code-size 0x43E9 --iram-size 256 --xram-size 1024 --model-small
+
+: foreach *.c |> ^ CC %f^ $(CC) $(CFLAGS) -c %f -o %o |> %B.rel | %O.asm %O.lst %O.sym
+: *.rel | *.lst |> ^ LD %f^ $(CC) $(LDFLAGS) %f -o %o |> main.ihx | %O.lk %O.map %O.mem %O.rst
